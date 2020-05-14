@@ -1,0 +1,19 @@
+#include<string>
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)
+        {
+            return false;
+        }
+        string stri = to_string(x);
+        for(int i=0;i<stri.length();i++)
+        {
+            if(stri[i] != stri[stri.length()-1-i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
