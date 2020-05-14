@@ -1,0 +1,39 @@
+#include<string>
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+       if(strs.size() != 0)
+       {
+           string prefix = strs[0];
+       string answer = prefix;
+       int x=1;
+       while(x!=strs.size())
+       {   
+           answer = "";
+           int length = strs[x].length();
+           for(int i=0;i<length;i++)
+           {
+               if(prefix[i] == strs[x][i])
+               {
+                   answer.push_back(prefix[i]);
+               }
+               else
+               {
+                   break;
+               }
+           }
+           prefix = answer;
+           if(prefix == "")
+           {
+               return "";
+           }
+           x++;
+        }
+            return answer;
+        }
+        else
+        {
+            return "";
+        }
+    }
+};
