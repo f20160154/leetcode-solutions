@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle.length()==0)
+        {
+            return 0;
+        }
+        if(haystack.length() == 0)
+        {
+            return -1;
+        }
+        string s=needle+'$'+haystack;
+        int z[s.length()];
+        z[0]=-1;
+        for(int k=1,l=0,r=0;k<=s.length()-1;k++)
+        {
+            if(k>r)
+            {
+                l=r=k;
+                while(r<s.length() and s[r-l] == s[r])
+                {
+                    r++;
+                }
+                z[k]=r-l;
+                r--;
+            }
+            else
+            {
+                int i=k-l;
+                if(z[i]<r-k+1)
+                {
+                    z[k]=z[i];
+                }
+                else
+                {
+                    l=k;
+                    while(r<s.length() and s[r-l] == s[r])
+                    {
+                        r++;
+                    }
+                    z[k]=r-l;
+                    r--;
+                }
+            }
+        }
+        for(int i=needle.length()+1;i<=s.length()-1;i++)
+        {
+            if(z[i]==needle.length())
+            {
+                return i-(needle.length()+1);
+            }
+        }
+        return -1;
+    }
+};
