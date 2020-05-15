@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        digits[digits.size()-1]++;
+        if(digits[digits.size()-1] != 10)
+        {
+            return digits;
+        }
+        int i=digits.size()-1;
+        while(i>=1 and digits[i]==10)
+        {
+            digits[i]=0;
+            digits[i-1]+=1;
+            i--;
+        }
+        if(i==0)
+        {
+            if(digits[0]==10)
+            {
+                digits[0]=0;
+                vector<int>::iterator itr= digits.begin();
+                digits.insert(itr,1);
+            }
+        }
+        return digits;
+        
+    }
+};
