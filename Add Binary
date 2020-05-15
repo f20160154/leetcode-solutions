@@ -1,0 +1,54 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        if(a.length()==1 and a[0]==0)
+        {
+            return b;
+        }
+        if(b.length()==1 and b[0]==0)
+        {
+            return a;
+        }
+        if(a.length()<b.length())
+        {
+            string temp = b;
+            b=a;
+            a=temp;
+        }
+        int lengthOfB=b.length()-1;
+        for(int i=a.length()-1;i>lengthOfB;i--)
+        {
+            b='0'+b;
+        }
+        char carry='0';
+        string sum;
+        for(int i=a.length()-1;i>=0;i--)
+        {
+            if(a[i]=='0' and b[i]=='0' and carry=='0')
+            {
+                sum='0'+sum;
+                carry='0';
+            }
+            else if((a[i]=='0' and b[i]=='0' and carry=='1') or (a[i]=='1' and b[i]=='0' and carry=='0') or (a[i]=='0' and b[i]=='1' and carry=='0'))
+            {
+                sum='1'+sum;
+                carry='0';
+            }
+            else if((a[i]=='1' and b[i] == '1' and carry=='0') or (a[i]=='0' and b[i]=='1' and carry=='1') or (a[i]=='1' and b[i]=='0' and carry=='1'))
+            {
+                sum='0'+sum;
+                carry='1';
+            }
+            else
+            {
+                sum='1'+sum;
+                carry='1';
+            }
+        }
+        if(carry=='1')
+        {
+            sum='1'+sum;
+        }
+        return sum;
+    }
+};
