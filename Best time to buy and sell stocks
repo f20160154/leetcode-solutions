@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()==0)
+        {
+            return 0;
+        }
+        if(prices.size()==1)
+        {
+            return 0;
+        }
+        vector<int> difference;
+        for(int i=1;i<=prices.size()-1;i++)
+        {
+            difference.push_back(prices[i]-prices[i-1]);
+        }
+        int sum=0;
+        int max=0;
+        for(int i=0;i<=difference.size()-1;i++)
+        {
+            sum+=difference[i];
+            if(sum>max)
+            {
+                max=sum;
+            }
+            if(sum<0)
+            {
+                sum=0;
+            }
+        }
+        return max;
+    }
+};
