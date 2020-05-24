@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> answer;
+        answer.push_back(1);
+        if(rowIndex==0)
+        {
+            return answer;
+        }
+        answer.push_back(1);
+        if(rowIndex==1)
+        {
+            return answer;
+        }
+        while(answer.size()<(rowIndex+1))
+        {
+            vector<int> temp=answer;
+            int i=1;
+            answer.clear();
+            answer.push_back(1);
+            while(i!=temp.size()) {
+                answer.push_back(temp[i]+temp[i-1]);
+                i++;
+            }
+            answer.push_back(1);
+        }
+        return answer;
+    }
+};
