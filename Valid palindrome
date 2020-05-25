@@ -1,0 +1,56 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        if(s.length()==0)
+        {
+            return true;
+        }
+        int j=s.length()-1;
+        int i=0;
+        while(j>=i)
+        {
+            if((s[i]<'0') or (s[i]>'9' and s[i]<'A') or (s[i]>'Z' and s[i]<'a') or (s[i]>'z'))
+            {
+                if((s[j]<'0') or (s[j]>'9' and s[j]<'A') or (s[j]>'Z' and s[j]<'a') or (s[j]>'z'))
+                {
+                    j--;
+                }
+            }
+            else 
+            {
+                if((s[j]<'0') or (s[j]>'9' and s[j]<'A') or (s[j]>'Z' and s[j]<'a') or (s[j]>'z'))
+                {
+                    j--;
+                    i--;
+                }
+                else
+                {
+                    if((s[i]>='0' and s[i]<='9') or (s[j]>='0' and s[j]<='9'))
+                    {
+                        if(s[i]==s[j])
+                        {
+                            j--;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else 
+                    {
+                        if(s[i]==s[j] or s[i]==s[j]-32 or s[i]-32==s[j])
+                        {
+                            j--;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            i++;
+        }
+        return true;
+    }
+};
