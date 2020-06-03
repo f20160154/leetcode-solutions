@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        vector<pair<int,int>> difference;
+        for(int i=0;i<=costs.size()-1;i++)
+        {
+            if(costs[i][0]>costs[i][1])
+            {
+                difference.push_back(make_pair(costs[i][0]-costs[i][1],i));
+            }
+            else
+            {
+                difference.push_back(make_pair(costs[i][1]-costs[i][0],i));
+            }
+        }
+        sort(difference.begin(),difference.end());
+        int a=(costs.size()/2), b=(costs.size()/2);
+        int sum=0;
+        for(int i=difference.size()-1;i>=0;i--)
+        {
+            if(costs[difference[i].second][1]>costs[difference[i].second][0])
+            {
+                if(a>0)
+                {
+                  sum+=costs[difference[i].second][0]; 
+                  a--;
+                }
+                else
+                {
+                    sum+=costs[difference[i].second][1];
+                    b--;
+                }
+            }
+            else
+            {
+                if(b>0)
+                {
+                    sum+=costs[difference[i].second][1]; 
+                    b--;
+                }
+                else
+                {
+                    sum+=costs[difference[i].second][0];
+                    a--;
+                }
+            }
+        }
+        return sum;
+    }
+};
