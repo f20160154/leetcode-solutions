@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        if(s.length()==0 and t.length()==0)
+        {
+            return true;
+        }
+        if(s.length()==0)
+        {
+            return true;
+        }
+        if(t.length()==0)
+        {
+            return false;
+        }
+        int k=0;
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            bool count=false;
+            if(k>=t.length())
+            {
+                return false;
+            }
+            for(int j=k;j<=t.length()-1;j++)
+            {
+                if(t[j]==s[i])
+                {
+                    count=true;
+                    j++;
+                    k=j;
+                    break;
+                }
+            }
+            if(count==false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
