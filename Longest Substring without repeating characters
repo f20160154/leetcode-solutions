@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length()==0)
+        {
+            return 0;
+        }
+        int l=0,r=-1,max=-1000;
+        map<char,int> m;
+        for(char i=' ';i<='~';i++)
+        {
+            m[i]=-1;
+        }
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            if(m[s[i]]<l)
+            {
+                m[s[i]]=-1;
+            }
+            if(m[s[i]]==-1)
+            {
+                m[s[i]]=i;
+                //cout << l<< " "<<r << " " << i<< " "<<max <<endl;
+                r++;
+                if(r-l+1>max)
+                {
+                    max=r-l+1;
+                }
+            }
+            else
+            {
+                l=m[s[i]]+1;
+                m[s[i]]=i;
+                r=i;
+            }
+        }
+        return max;
+    }
+};
