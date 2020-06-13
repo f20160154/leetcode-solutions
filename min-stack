@@ -1,0 +1,43 @@
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    stack<int> s;
+    map<int,int> m;
+    MinStack() {
+        m.clear();
+    }
+    
+    void push(int x) {
+        s.push(x);
+        m[x]++;
+    }
+    
+    void pop() {
+        int top1=s.top();
+        s.pop();
+        m[top1]-=1;
+        if(m[top1]==0)
+        {
+            m.erase(top1);   
+        }
+    }
+    
+    int top() {
+        return s.top();
+    }
+    
+    int getMin() {
+        map<int,int>::iterator itr=m.begin();
+        pair<int,int> p=*itr;
+        return p.first;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
