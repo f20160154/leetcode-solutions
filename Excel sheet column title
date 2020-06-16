@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string convertToTitle(int n) {
+        string str;
+        while(n!=0)
+        {
+            int rem=n%26;
+            if(rem==0)
+            {
+                rem=26;
+            }
+            str=char(64+rem)+str;
+            if(n<=26)
+            {
+                break;
+            }
+            if(n%26==0)
+            {
+                n=(n/26)-1;
+            }
+            else
+            {
+                n=n/26;
+            }
+        }
+        return str;
+    }
+};
