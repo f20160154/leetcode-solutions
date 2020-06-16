@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int x=0;
+        int num=0;
+        while(x<s.length())
+        {
+            num=(num*26)+(s[x]-'A'+1);
+            x++;
+        }
+        return num;
+    }
+};
