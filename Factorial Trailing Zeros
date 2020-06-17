@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int answer=0;
+        while(n>=5)
+        {
+            int temp=n;
+            int num=0;
+            int dif=1;
+            while(temp>=5)
+            {
+                num++;
+                temp=temp/5;
+                dif=dif*5;
+            }
+            int result=0;
+            for(int i=1;i<=num;i++) {
+                result=result*5+1;
+            }
+            answer+=result;
+            n-=dif;
+        }
+        return answer;
+    }
+};
