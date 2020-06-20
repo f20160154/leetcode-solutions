@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        if(n==0)
+        {
+            return "";
+        }
+        int arr[n+1];
+        arr[0]=1;
+        string str;
+        for(int i=1;i<=n;i++)
+        {
+            arr[i]=arr[i-1]*i;
+            str+='0'+i;
+        }
+        if(k>arr[n])
+        {
+            return "";
+        }
+        string s;
+        int div=0,rem=0;
+        while(n!=1)
+        {
+            div=k/arr[n-1];
+            rem=k%arr[n-1];
+            if(rem==0)
+            {
+                div=div-1;
+                rem=arr[n-1];
+            }
+            s+=str[div];
+            str.erase(div,1);
+            k=rem;
+            n--;
+        }
+        s+=str[0];
+        return s;
+    }
+};
