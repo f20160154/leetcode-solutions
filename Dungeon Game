@@ -1,0 +1,76 @@
+class Solution {
+public:
+    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+        queue<pair<int,int>> q;
+        int size = dungeon.size()-1;
+        if(size==-1)
+        {
+            return 0;
+        }
+        pair<int,int> p = make_pair(size,dungeon[size].size()-1);
+        q.push(p);
+        vector<vector<int>>result=dungeon;
+        for(int i=0;i<=result.size()-1;i++)
+        {
+            for(int j=0;j<=result[i].size()-1;j++)
+            {
+                result[i][j]=-1;
+            }
+        }
+        int y=1-dungeon[q.front().first][q.front().second];
+        if(y<=0)
+        {
+            y=1;
+        }
+        result[size][result[size].size()-1]=y;
+        while(!q.empty()) {
+            pair<int,int>temp=q.front();
+            q.pop();
+            if(temp.first-1>=0)
+            {
+                int x=result[temp.first][temp.second]-dungeon[temp.first-1][temp.second];
+                if(x<=0)
+                {
+                    x=1;
+                }
+                if(result[temp.first-1][temp.second]!=-1)
+                {
+                    if(x<result[temp.first-1][temp.second])
+                    {
+                        result[temp.first-1][temp.second]=x;
+                        q.push(make_pair(temp.first-1,temp.second));
+                    }
+                }
+                else
+                {
+                    result[temp.first-1][temp.second]=x;
+                    q.push(make_pair(temp.first-1,temp.second));
+                }
+                
+            }
+            if(temp.second-1>=0)
+            {
+                int x=result[temp.first][temp.second]-dungeon[temp.first][temp.second-1];
+                if(x<=0)
+                {
+                    x=1;
+                }
+                if(result[temp.first][temp.second-1]!=-1)
+                {
+                    if(x<result[temp.first][temp.second-1])
+                    {
+                        result[temp.first][temp.second-1]=x;
+                        q.push(make_pair(temp.first,temp.second-1));
+                    }
+                }
+                else
+                {
+                    result[temp.first][temp.second-1]=x;
+                    q.push(make_pair(temp.first,temp.second-1));
+                }
+                
+            }
+        }
+        return result[0][0];
+    }
+};
