@@ -1,0 +1,1 @@
+Select MAX(Salary) AS SecondHighestSalary From Employee Where Salary<(Select MAX(Salary) From Employee) Order BY Salary DESC;
