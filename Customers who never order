@@ -1,0 +1,2 @@
+Select Name As Customers from Customers where Customers.ID not in (Select Customers.Id from Customers Join Orders where Customers.Id=Orders.CustomerId);
+
