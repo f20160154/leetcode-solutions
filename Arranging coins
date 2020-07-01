@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        long long int n1=n;
+        long long int x=8*n1+1;
+        x=((sqrt(x)-3)/2)+1;
+        return (int)x;
+    }
+};
