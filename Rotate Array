@@ -1,0 +1,65 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        if(k>=nums.size())
+        {
+            k=k%nums.size();
+        }
+        if(nums.size()==k or k==0)
+        {
+            return;
+        }
+        if((nums.size()%k)==0)
+        {
+            for(int i=0;i<=k-1;i++)
+            {
+                int count=0,j=i,temp=nums[i];
+                while(count!=(nums.size()/k))
+                {
+                    count++;
+                    int temp1=temp;
+                    temp=nums[((j+k)%nums.size())];
+                    nums[((j+k)%nums.size())]=temp1;
+                    j=(j+k)%nums.size();
+                }
+            }
+            return;
+        }
+        if(nums.size()%(nums.size()-k)==0)
+        {
+            k=nums.size()-k;
+            for(int i=0;i<=k-1;i++)
+            {
+                int count=0,j=i,temp=nums[i];
+                while(count!=(nums.size()/k))
+                {
+                    count++;
+                    int temp1=temp;
+                    if(j-k<0)
+                    {
+                        temp=nums[(j-k+nums.size())%nums.size()];
+                        nums[(j-k+nums.size())%nums.size()]=temp1;
+                        j=(j-k+nums.size())%nums.size();
+                    }
+                    else
+                    {
+                        temp=nums[(j-k)%nums.size()];
+                        nums[(j-k)%nums.size()]=temp1;
+                        j=(j-k)%nums.size();
+                    }
+                }
+            }
+            return;
+        }
+        int count=0,temp=nums[0],i=0;
+        while(count!=nums.size())
+        {
+            count++;
+            int temp1=temp;
+            temp=nums[((i+k)%nums.size())];
+            nums[((i+k)%nums.size())]=temp1;
+            i=(i+k)%nums.size();
+        }
+        return ;
+    }
+};
