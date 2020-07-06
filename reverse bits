@@ -1,0 +1,22 @@
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        vector<uint32_t>v,v1;uint32_t res=1;
+        for(int i=0;i<=31;i++)
+        {
+            v.push_back(n%2);
+            n=n/2;
+            v1.push_back((int)res);
+            res=res*2;
+        }
+        uint32_t x=0;
+        for(int i=31;i>=0;i--)
+        {
+            if(v[i]==1)
+            {
+                x=x+v1[31-i];
+            }
+        }
+        return x;
+    }
+};
