@@ -1,0 +1,88 @@
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        if(numCourses==0)
+        {
+            vector<int> v;
+            return v;
+        }
+        if(prerequisites.size()==0)
+        {
+            vector<int> v;
+            for(int i=0;i<=numCourses-1;i++)
+            {
+                v.push_back(i);
+            }
+            return v;
+        }
+        bool visited[numCourses];
+        vector<int> v;
+        vector<int> v1[numCourses];
+        for(int i=0;i<=prerequisites.size()-1;i++)
+        {
+            v1[prerequisites[i][0]].push_back(prerequisites[i][1]);
+        }
+        for(int i=0;i<=numCourses-1;i++)
+        {
+            visited[i]=false;
+        }
+        for(int i=0;i<=numCourses-1;i++)
+        {
+            if(visited[i]==true)
+            {
+                continue;
+            }
+            if(v1[i].size()==0)
+            {
+                v.push_back(i);
+                visited[i]=true;
+                continue;
+            }
+            stack<int> q;
+            q.push(i);
+            set<int> s;
+            while(!q.empty())
+            {
+                int temp=q.top();
+                if(visited[temp]==true)
+                {
+                    q.pop();
+                    continue;
+                }
+                int count=0;
+                if(v1[temp].size()>0)
+                {
+                    for(int j=0;j<=v1[temp].size()-1;j++)
+                    {
+                        if(visited[v1[temp][j]]==false)
+                        {
+                            q.push(v1[temp][j]);
+                            count=1;
+                        }
+                    }
+                }
+                if(count==0)
+                {
+                    v.push_back(temp);
+                    visited[temp]=true;
+                    q.pop();
+                }
+                else
+                {
+                     if(visited[temp]==false)
+                    {
+                        int size=s.size();
+                        s.insert(temp);
+                        if(size==s.size())
+                        {
+                            cout<<temp<<endl;
+                            v.clear();
+                            return v;
+                        }
+                    }
+                }
+            }
+        }
+        return v;
+    }
+};
