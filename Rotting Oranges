@@ -1,0 +1,91 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        if(grid.size()==0)
+        {
+            return 0;
+        }
+        if(grid[0].size()==0)
+        {
+            return 0;
+        }
+        queue<pair<pair<int,int>,int>> q;
+        int countOfRipe = 0;
+        for(int i=0;i<=grid.size()-1;i++)
+        {
+            for(int j=0;j<=grid[i].size()-1;j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    q.push(make_pair(make_pair(i,j),0));
+                }
+                else if(grid[i][j]==1)
+                {
+                    countOfRipe++;
+                }
+            }
+        }
+        if(countOfRipe==0)
+        {
+            return 0;
+        }
+        if(q.empty())
+        {
+            return -1;
+        }
+        int max=0;
+        while(!q.empty())
+        {
+            pair<pair<int,int>,int> temp=q.front();
+            q.pop();
+            if(temp.first.first-1>=0 and grid[temp.first.first-1][temp.first.second]==1)
+            {
+                q.push(make_pair(make_pair(temp.first.first-1,temp.first.second),temp.second+1));
+                countOfRipe-=1;
+                grid[temp.first.first-1][temp.first.second]=2;
+                if(temp.second+1>max)
+                {
+                    max=temp.second+1;
+                }
+            }
+            if(temp.first.first+1<=grid.size()-1 and grid[temp.first.first+1][temp.first.second]==1)
+            {
+                q.push(make_pair(make_pair(temp.first.first+1,temp.first.second),temp.second+1));
+                countOfRipe-=1;
+                grid[temp.first.first+1][temp.first.second]=2;
+                if(temp.second+1>max)
+                {
+                    max=temp.second+1;
+                }
+            }
+            if(temp.first.second-1>=0 and grid[temp.first.first][temp.first.second-1]==1)
+            {
+                q.push(make_pair(make_pair(temp.first.first,temp.first.second-1),temp.second+1));
+                countOfRipe-=1;
+                grid[temp.first.first][temp.first.second-1]=2;
+                if(temp.second+1>max)
+                {
+                    max=temp.second+1;
+                }
+            }
+            if(temp.first.second+1<=grid[temp.first.first].size()-1 and grid[temp.first.first][temp.first.second+1]==1)
+            {
+                q.push(make_pair(make_pair(temp.first.first,temp.first.second+1),temp.second+1));
+                countOfRipe-=1;
+                grid[temp.first.first][temp.first.second+1]=2;
+                if(temp.second+1>max)
+                {
+                    max=temp.second+1;
+                }
+            }
+        }
+        if(countOfRipe==0)
+        {
+            return max;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+};
